@@ -1,5 +1,11 @@
 language: java
 jdk: openjdk7
+
+# whitelist
+branches:
+  only:
+    - master
+
 before_install: "gem install fpm"
 install:
   - sudo apt-get update
