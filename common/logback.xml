@@ -1,0 +1,34 @@
+<configuration scan="true">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{60}[:%line] - %msg%n%ex{5}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/opt/swookiee/log/osgi.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{60}[:%line] - %msg%n%ex{5}</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="REQUESTS" class="ch.qos.logback.core.FileAppender">
+        <file>/opt/swookiee/log/request.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} - %msg%n%ex{5}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.eclipse.jetty" level="INFO" />
+    
+    <!-- To enable request logs, set log level to INFO -->
+    <logger name="org.glassfish.jersey.filter.LoggingFilter" level="WARN" additivity="false">
+        <appender-ref ref="REQUESTS"/>
+    </logger>
+    
+    <root level="DEBUG">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
