@@ -1,13 +1,12 @@
 #!/bin/sh -x
 
 usage () {
-  echo "usage: `basename $0` [-n name] [-v version] [-p profile] [-h home] [-l log] [-b build]"
+  echo "usage: `basename $0` [-n name] [-v version] [-h home] [-l log] [-b build]"
   exit 1
 }
 
 name=swookiee
 version=1.0.0-SNAPSHOT
-profile=development
 build=`date "+%Y%m%d%H%M%S"`
 dir=target
 description="Swookiee"
@@ -16,7 +15,6 @@ while getopts "n:v:p:h:l:b:" option; do
   case "$option" in
     n) name="$OPTARG";;
     v) version="$OPTARG";;
-    p) profile="$OPTARG";;
     h) home="$OPTARG";;
     l) log="$OPTARG";;
     b) build="$OPTARG";;
@@ -37,7 +35,7 @@ log=${log:-/opt/$id/log/$id}
 
 echo "packaging service: $id"
 
-common="-s dir --force -t rpm -n ${name}-${profile} -v ${version}\
+common="-s dir --force -t rpm -n ${name} -v ${version}\
  --architecture noarch\
  --iteration ${build}\
  --license \"EPL\"\
