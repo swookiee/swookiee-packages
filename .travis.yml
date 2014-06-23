@@ -1,7 +1,0 @@
-language: java
-jdk: openjdk7
-before_install: "gem install fpm"
-install:
-  - sudo apt-get update
-  - DEBIAN_FRONTEND=noninteractive sudo apt-get install -y rpm
-script: mvn clean install -Prpm -DbuildNumber=$TRAVIS_BUILD_NUMBER
