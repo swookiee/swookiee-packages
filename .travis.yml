@@ -7,7 +7,7 @@ before_install: gem install fpm
 install:
 - sudo apt-get update
 - DEBIAN_FRONTEND=noninteractive sudo apt-get install -y rpm
-script: mvn clean install -Prpm -DbuildNumber=$TRAVIS_BUILD_NUMBER
+script: mvn clean install -Prpm -DbuildNumber=latest
 after_success: bash upload-to-gh-pages.sh
 env:
   global:
