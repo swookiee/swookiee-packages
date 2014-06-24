@@ -16,6 +16,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   #go into dir and copy data we're interested in to that directory
   cd gh-pages
   cp -Rf $HOME/uploads/* .
+  ln -sf swookiee-1.0.0_SNAPSHOT-$TRAVIS_BUILD_NUMBER.noarch.rpm swookiee-1.0.0_SNAPSHOT-latest.noarch.rpm
 
   #add, commit and push files
   git add -f .
