@@ -18,7 +18,9 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   rm -rf *.rpm
   cp -Rf $HOME/uploads/* .
   # Needs to be update when there is a release version and tags...
+  # Chef client does not support to follow sym links...
   # ln -sf swookiee-1.0.0_SNAPSHOT-$TRAVIS_BUILD_NUMBER.noarch.rpm swookiee-1.0.0_SNAPSHOT-latest.noarch.rpm
+  cp *.rpm swookiee-1.0.0_SNAPSHOT-latest.noarch.rpm
 
   #add, commit and push files
   git add --all -f .

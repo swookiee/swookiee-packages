@@ -106,8 +106,7 @@
                                   <configuration>
                                       <artifacts>
                                           <artifact>
-                                              <!-- file>${project.build.directory}/swookiee-${rpm.version}-${buildNumber}.noarch.rpm</file-->
-                                              <file>${project.build.directory}/swookiee-${rpm.version}-latest.noarch.rpm</file>
+                                              <file>${project.build.directory}/swookiee-${rpm.version}-${buildNumber}.noarch.rpm</file>
                                               <type>rpm</type>
                                           </artifact>
                                       </artifacts>
