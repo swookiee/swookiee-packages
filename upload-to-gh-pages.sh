@@ -2,6 +2,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   echo -e "Starting to upload gh-pages\n"
 
   #copy rpms
+  mkdir $HOME/uploads
   cp -R target/*.rpm $HOME/uploads
 
   #go to home and setup git
