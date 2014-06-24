@@ -17,8 +17,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   cd gh-pages
   rm -rf *.rpm
   cp -Rf $HOME/uploads/* .
-  # will be updated when we have a release version and we use tags
-  ln -sf swookiee-1.0.0_SNAPSHOT-$TRAVIS_BUILD_NUMBER.noarch.rpm swookiee-1.0.0_SNAPSHOT-latest.noarch.rpm
+  # Needs to be update when there is a release version and tags...
+  # ln -sf swookiee-1.0.0_SNAPSHOT-$TRAVIS_BUILD_NUMBER.noarch.rpm swookiee-1.0.0_SNAPSHOT-latest.noarch.rpm
 
   #add, commit and push files
   git add --all -f .
