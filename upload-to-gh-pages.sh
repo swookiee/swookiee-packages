@@ -21,7 +21,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   ln -sf swookiee-1.0.0_SNAPSHOT-$TRAVIS_BUILD_NUMBER.noarch.rpm swookiee-1.0.0_SNAPSHOT-latest.noarch.rpm
 
   #add, commit and push files
-  git add -f .
+  git add --all -f .
   git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
   git push -fq origin gh-pages > /dev/null
 
