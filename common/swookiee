@@ -31,7 +31,7 @@ check_status() {
 start() {
 
   pid=`check_status`
-  
+
   if [ $pid ] ; then
     echo "swookiee runtime is already started"
     exit 1
@@ -60,7 +60,7 @@ start() {
 stop() {
 
   pid=`check_status`
-  
+
   if ! [ $pid ] ; then
     echo "swookiee is already stopped"
     return 1
@@ -74,7 +74,8 @@ stop() {
     echo "OK"
   else
     echo "FAILED"
-  fi 
+  fi
+  sleep 1s
 }
 
 status() {
