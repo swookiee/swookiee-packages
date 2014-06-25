@@ -63,7 +63,7 @@ stop() {
   
   if ! [ $pid ] ; then
     echo "swookiee is already stopped"
-    exit 1
+    return 1
   fi
 
   # Kills the swookiee osgi process
