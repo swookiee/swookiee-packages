@@ -18,7 +18,7 @@ RUNTIME_LOCATION="/opt/swookiee"
 
 COMMAND="java $GC $MEMORY $DROP_IN\
  -Dlogback.configurationFile=$RUNTIME_LOCATION/logback.xml\
- -cp $RUNTIME_LOCATION/target/runtime/plugins/org.eclipse.equinox.launcher* org.eclipse.equinox.launcher.Main\
+ -cp $RUNTIME_LOCATION/runtime/plugins/org.eclipse.equinox.launcher* org.eclipse.equinox.launcher.Main\
  -initialize\
  -noExit\
  -configuration $RUNTIME_LOCATION/runtime/configuration"
