@@ -18,8 +18,9 @@ RUNTIME_LOCATION="/opt/swookiee"
 
 COMMAND="java $GC $MEMORY $DROP_IN\
  -Dlogback.configurationFile=$RUNTIME_LOCATION/logback.xml\
- -Dosgi.compatibility.bootdelegation=true\
- -jar $RUNTIME_LOCATION/runtime/plugins/org.eclipse.osgi_3.9.1.v20140110-1610.jar\
+ -cp $RUNTIME_LOCATION/target/runtime/plugins/org.eclipse.equinox.launcher* org.eclipse.equinox.launcher.Main\
+ -initialize\
+ -noExit\
  -configuration $RUNTIME_LOCATION/runtime/configuration"
 
 # Check the swookiee runtime status
