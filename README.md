@@ -2,7 +2,7 @@
 
 ##### 25
  - added asyc servlets
- - Jersey update to 2.12
+ - Jersey update to 2.12, and others
  
 ##### 25
  - Reverted back to Jersey 2.10.1 since it throws some interesting warnings / exceptions during deployments
