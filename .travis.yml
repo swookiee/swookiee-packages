@@ -8,7 +8,10 @@ install:
 - sudo apt-get update
 - DEBIAN_FRONTEND=noninteractive sudo apt-get install -y rpm
 script: mvn clean install -Prpm -DbuildNumber=$TRAVIS_BUILD_NUMBER
-after_success: bash upload-to-gh-pages.sh
-env:
-  global:
-    secure: kxPyOhp5aMngzF+Dd62rweknG4toCHE0kC3v6bW2NiKVpaY6QpuFi5yrxdYvPT6H4PJTP/ehWcTUsF8JbOwrJe2pHP9c1e4ZN5uKCRCmi/I1BYzs5nTwC9Lu6PNF2aJTTAtiwnAN3xwwdMOLt+erWCN8rbYdFfwKNbRE2SyNwIs=
+deploy:
+  provider: releases
+  api_key:
+    secure: WDFshkkJVYKBDEOGprE69NiKUPUuuwVwZIfrJpPwmaWq91e1i0oOZo5aLg4hzsBl2ombmQ0hGJV2BzdnaC8rK7pLmfGW6be3bHlaDUSf5LU1bQ9p3sfUdN996AL7r7B0iSLGtnvm2CL8IvzQc5dvajPQPDKS+1Lzeqmd1iZkGTY=
+  file: swookiee-1.0.0_SNAPSHOT-$TRAVIS_BUILD_NUMBER.noarch.rpm
+  on:
+    repo: swookiee/swookiee-packages
