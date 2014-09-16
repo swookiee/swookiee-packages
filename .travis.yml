@@ -15,9 +15,5 @@ deploy:
   file: swookiee-1.0.0_SNAPSHOT-$TRAVIS_BUILD_NUMBER.noarch.rpm
   skip_cleanup: true
   on:
-    tags: true
     all_branches: true
     repo: swookiee/swookiee-packages
-branches:
-  only:
-    - master
