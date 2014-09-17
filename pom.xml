@@ -11,28 +11,22 @@
 
       <repositories>
           <repository>
-              <id>sonatype-snapshot</id>
-              <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-              <releases>
-                  <enabled>false</enabled>
-              </releases>
-              <snapshots>
-                  <enabled>true</enabled>
-              </snapshots>
+              <id>ossrh-staging</id>
+              <url>https://oss.sonatype.org/content/repositories/staging/</url>
           </repository>
       </repositories>
 
       <properties>
           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
           <buildNumber>local</buildNumber>
-          <rpm.version>1.0.0_SNAPSHOT</rpm.version>
+          <swookiee.version>0.0.1</swookiee.version>
       </properties>
 
       <dependencies>
           <dependency>
               <groupId>com.swookiee</groupId>
               <artifactId>com.swookiee.runtime.product</artifactId>
-              <version>${project.version}</version>
+              <version>${swookiee.version}</version>
               <classifier>linux.gtk.x86_64</classifier>
               <type>zip</type>
           </dependency>
@@ -58,7 +52,7 @@
                                           <artifactItem>
                                               <groupId>com.swookiee</groupId>
                                               <artifactId>com.swookiee.runtime.product</artifactId>
-                                              <version>${project.version}</version>
+                                              <version>${swookiee.version}</version>
                                               <classifier>linux.gtk.x86_64</classifier>
                                               <type>zip</type>
                                               <overWrite>true</overWrite>
@@ -85,7 +79,7 @@
                                   <configuration>
                                       <executable>${basedir}/fpm.sh</executable>
                                       <arguments>
-                                          <argument>-v ${project.version}</argument>
+                                          <argument>-v ${swookiee.version}</argument>
                                           <argument>-b ${buildNumber}</argument>
                                       </arguments>
                                   </configuration>
@@ -106,7 +100,7 @@
                                   <configuration>
                                       <artifacts>
                                           <artifact>
-                                              <file>${project.build.directory}/swookiee-${rpm.version}-${buildNumber}.noarch.rpm</file>
+                                              <file>${project.build.directory}/swookiee-${swookiee.version}-${buildNumber}.noarch.rpm</file>
                                               <type>rpm</type>
                                           </artifact>
                                       </artifacts>
