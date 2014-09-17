@@ -10,7 +10,7 @@ deploy:
   provider: releases
   api_key:
     secure: WDFshkkJVYKBDEOGprE69NiKUPUuuwVwZIfrJpPwmaWq91e1i0oOZo5aLg4hzsBl2ombmQ0hGJV2BzdnaC8rK7pLmfGW6be3bHlaDUSf5LU1bQ9p3sfUdN996AL7r7B0iSLGtnvm2CL8IvzQc5dvajPQPDKS+1Lzeqmd1iZkGTY=
-  file: swookiee-$SWOOKIEE_VERSION-$TRAVIS_BUILD_NUMBER.noarch.rpm
+  file: target/swookiee-$SWOOKIEE_VERSION-$TRAVIS_BUILD_NUMBER.noarch.rpm
   skip_cleanup: true
   on:
     tags: true
