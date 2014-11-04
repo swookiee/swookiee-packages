@@ -19,7 +19,7 @@
       <properties>
           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
           <buildNumber>local</buildNumber>
-          <swookiee.version>0.0.2</swookiee.version>
+          <swookiee.version>0.0.4</swookiee.version>
       </properties>
 
       <dependencies>
