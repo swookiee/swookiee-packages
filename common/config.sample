@@ -1,11 +1,8 @@
 ## swookiee config file.
 ## Copy this to /etc/default/swookiee
 
-# Garbage Collector
-GC="-XX:+UseG1GC"
-
 # JVM settings and properties
-JVM_OPTS="-XX:MaxPermSize=512m -Xms32m -Xmx4096m"
+JVM_OPTS="-XX:+UseG1GC -XX:MaxPermSize=512m -Xms32m -Xmx4096m"
 
 # Drop In Folder
 DROP_IN="-Dfelix.fileinstall.dir=/opt/swookiee/bundles"
