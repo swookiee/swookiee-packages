@@ -16,7 +16,7 @@ RUNTIME_LOCATION="/opt/swookiee"
 ## TODO
 ## enable debug args configurable via export
 
-COMMAND="java $GC $MEMORY $DROP_IN\
+COMMAND="java $GC $JVM_OPTS $DROP_IN\
  -Dlogback.configurationFile=$RUNTIME_LOCATION/logback.xml\
  -cp $RUNTIME_LOCATION/runtime/plugins/org.eclipse.equinox.launcher* org.eclipse.equinox.launcher.Main\
  -initialize\
@@ -58,6 +58,12 @@ start() {
 
 }
 
+clean_start() {
+  COMMAND="$COMMAND\
+  -clean"
+  start
+}
+
 stop() {
 
   pid=`check_status`
@@ -94,6 +100,9 @@ status() {
 case "$1" in
   start)
     start
+    ;;
+  clean-start)
+    clean_start
     ;;
   stop)
     stop
