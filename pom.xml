@@ -18,7 +18,7 @@
 
       <properties>
           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-          <buildNumber>local</buildNumber>
+          <tag>local</tag>
           <swookiee.version>0.0.4</swookiee.version>
       </properties>
 
@@ -80,7 +80,7 @@
                                       <executable>${basedir}/fpm.sh</executable>
                                       <arguments>
                                           <argument>-v ${swookiee.version}</argument>
-                                          <argument>-b ${buildNumber}</argument>
+                                          <argument>-t ${tag}</argument>
                                       </arguments>
                                   </configuration>
                               </execution>
@@ -100,7 +100,7 @@
                                   <configuration>
                                       <artifacts>
                                           <artifact>
-                                              <file>${project.build.directory}/swookiee-${swookiee.version}-${buildNumber}.noarch.rpm</file>
+                                              <file>${project.build.directory}/swookiee-${swookiee.version}-${tag}.noarch.rpm</file>
                                               <type>rpm</type>
                                           </artifact>
                                       </artifacts>

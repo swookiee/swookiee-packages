@@ -1,3 +1,4 @@
+mkdir /opt/swookiee/bundles
 chown -R swookiee:swookiee /opt/swookiee
 
 if [ "$1" = "1" ]; then
