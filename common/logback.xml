@@ -1,18 +1,7 @@
 <configuration scan="true">
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{60}[:%line] - %msg%n%ex{5}</pattern>
-        </encoder>
-    </appender>
-
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>/opt/swookiee/log/osgi.log</file>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{60}[:%line] - %msg%n%ex{5}</pattern>
-        </encoder>
-    </appender>
-    
+    <!-- To write a HTTP request log -->
+    <!--
     <appender name="REQUESTS" class="ch.qos.logback.core.FileAppender">
         <file>/opt/swookiee/log/request.log</file>
         <encoder>
@@ -20,15 +9,28 @@
         </encoder>
     </appender>
 
-    <logger name="org.eclipse.jetty" level="INFO" />
-    
-    <!-- To enable request logs, set log level to INFO -->
     <logger name="org.glassfish.jersey.filter.LoggingFilter" level="WARN" additivity="false">
         <appender-ref ref="REQUESTS"/>
-    </logger>
-    
-    <root level="DEBUG">
-        <appender-ref ref="FILE" />
-        <appender-ref ref="STDOUT" />
+    </logger> -->
+
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/opt/swookiee/log/osgi.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>osgi-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{60}[:%line] - %msg%n%ex{5}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ROLLING" />
     </root>
+
 </configuration>
