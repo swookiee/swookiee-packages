@@ -4,7 +4,7 @@ before_install: gem install fpm
 install:
 - sudo apt-get update
 - DEBIAN_FRONTEND=noninteractive sudo apt-get install -y rpm
-script: mvn clean install -Prpm -Dtag=$TRAVIS_TAG
+script: sh -c "if [ -z '$TRAVIS_TAG' ]; then mvn clean install -Prpm; else mvn clean install -Prpm -Dtag=$TRAVIS_TAG; fi"
 after_success: SWOOKIEE_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=swookiee.version|grep -Ev '(^\[|Download\w+:)')
 deploy:
   provider: releases
