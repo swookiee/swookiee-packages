@@ -75,7 +75,7 @@ stop() {
 
   # Kills the swookiee osgi process
   echo "Stopping swookiee"
-  kill -9 $pid
+  kill -15 $pid
   RES=$?
   if [ $RES -eq 0 ]; then
     echo "OK"
