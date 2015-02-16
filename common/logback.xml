@@ -25,7 +25,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{60}[:%line] - %msg%n%ex{5}</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{60}[:%line] - %msg%n%ex{full}</pattern>
         </encoder>
     </appender>
 
