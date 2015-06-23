@@ -6,3 +6,6 @@ JVM_OPTS="-XX:+UseG1GC -XX:MaxPermSize=512m -Xms32m -Xmx4096m"
 
 # Drop In Folder
 DROP_IN="-Dfelix.fileinstall.dir=/opt/swookiee/bundles"
+
+# Start process with non-default priority (default 'nice' priorities -20 to 19)
+PROCESS_PRIORITY=0
