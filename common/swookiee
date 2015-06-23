@@ -11,7 +11,7 @@ test -f $CONFIG_FILE && . $CONFIG_FILE
 test ! -f $CONFIG_FILE && echo "Config not found - starting with defaults."
 
 ## Check if priority is set, if not, default to 0
-if [ -z ${PROCESS_PRIORITY+x} ]; then PROCESS_PRIORITY=0; fi
+if [ -z ${PROCESS_PRIORITY} ]; then PROCESS_PRIORITY=0; fi
 
 ##
 RUNTIME_LOCATION="/opt/swookiee"
