@@ -38,7 +38,6 @@ start() {
 
   if [ $pid ] ; then
     echo "swookiee runtime is already started"
-    exit 1
   fi
 
   # does log dir exist?
