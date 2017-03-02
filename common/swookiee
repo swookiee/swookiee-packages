@@ -32,6 +32,18 @@ check_status() {
   echo "$s"
 }
 
+wait_seconds_for_swookiee() {
+  local n=$1
+  printf "Waiting for swookiee to terminate "
+  until [ $n -le 0 ] ; do
+    ! [ "$(check_status)" ] && break
+    n=$((n-1))
+    printf "."
+    sleep 1
+  done
+  echo
+}
+
 start() {
 
   pid=`check_status`
@@ -77,37 +89,36 @@ stop() {
   # use webconsole to stop osgi system bundle
   echo "Stopping swookiee system bundle"
   curl -X POST -s -f -u "${OSGI_WEBCONSOLE_USER:-admin}:${OSGI_WEBCONSOLE_PWD:-admin123}" \
-                  "http://localhost:${OSGI_WEBCONSOLE_PORT:-18080}/system/console/bundles/0?action=stop" \
+                  "http://localhost:${OSGI_WEBCONSOLE_PORT:-8080}/system/console/bundles/0?action=stop" \
                   > /dev/null
-  if [ "$?" -ne 0 ]; then
+  if [ "$?" -ne 0 ] ; then
     echo "Failed to stop swookiee system bundle!"
-    exit 1
+  else
+    wait_seconds_for_swookiee 30
   fi
 
-  # wait for swookiee to finish clean shutdown
-  n=3
-  until [ $n -le 0 ]
-  do
-    ! [ "$(check_status)" ] && break
-    n=$((n-1))
-    echo "Waiting for swookiee to shutdown, $n retries left"
-    sleep 10
-  done
-
   pid=$(check_status)
-  if [ "$pid" ] ; then
-    # Kill the swookiee osgi process
-    echo "Stopping swookiee cleanly was not successful - killing swookiee process"
-    kill -9 "$pid"
-    if [ $? -eq 0 ]; then
-      echo "OK - killed"
-    else
-      echo "FAILED"
+  if ! [ "$pid" ] ; then
+    echo "swookiee is stopped"
+    return 1
+  fi
+
+  echo "Stopping swookiee cleanly was not successful - sending SIGTERM to swookiee process"
+  kill -15 "$pid"
+  if [ $? -eq 0 ] ; then
+    echo "OK - SIGTERM sent"
+  else
+    echo "FAILED"
+  fi
+  if [ "$(check_status)" ] ; then
+    wait_seconds_for_swookiee 10
+    if [ "$(check_status)" ] ; then
+      echo "Stopping swookiee cleanly was not successful - sending SIGKILL to swookiee process"
+      kill -9 "$(check_status)"
     fi
   else
     echo "OK"
   fi
-  sleep 1s
 }
 
 status() {
