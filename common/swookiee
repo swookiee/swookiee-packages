@@ -69,21 +69,43 @@ clean_start() {
 
 stop() {
 
-  pid=`check_status`
-
-  if ! [ $pid ] ; then
+  if ! [ "$(check_status)" ] ; then
     echo "swookiee is already stopped"
     return 1
   fi
 
-  # Kills the swookiee osgi process
-  echo "Stopping swookiee"
-  kill -15 $pid
-  RES=$?
-  if [ $RES -eq 0 ]; then
-    echo "OK"
+  # use webconsole to stop osgi system bundle
+  echo "Stopping swookiee system bundle"
+  curl -X POST -s -f -u "${OSGI_WEBCONSOLE_USER:-admin}:${OSGI_WEBCONSOLE_PWD:-admin123}" \
+                  "http://localhost:${OSGI_WEBCONSOLE_PORT:-18080}/system/console/bundles/0?action=stop" \
+                  > /dev/null
+  if [ "$?" -ne 0 ]; then
+    echo "Failed to stop swookiee system bundle!"
+    exit 1
+  fi
+
+  # wait for swookiee to finish clean shutdown
+  n=3
+  until [ $n -le 0 ]
+  do
+    ! [ "$(check_status)" ] && break
+    n=$((n-1))
+    echo "Waiting for swookiee to shutdown, $n retries left"
+    sleep 10
+  done
+
+  pid=$(check_status)
+  if [ "$pid" ] ; then
+    # Kill the swookiee osgi process
+    echo "Stopping swookiee cleanly was not successful - killing swookiee process"
+    kill -9 "$pid"
+    if [ $? -eq 0 ]; then
+      echo "OK - killed"
+    else
+      echo "FAILED"
+    fi
   else
-    echo "FAILED"
+    echo "OK"
   fi
   sleep 1s
 }
